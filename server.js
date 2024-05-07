@@ -1,19 +1,18 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import data from './data/data.js';
-import { env } from 'process';
+import userRoute from './routes/user.route.js';
+import tweetsRoute from './routes/tweets.route.js';
 
 dotenv.config();
 
-const { PORT } = env;
+const { PORT } = process.env || 8000;
 
 const app = express();
+app.use(express.json());
 
-app.get("/tweets", (req, res) => {
-    res.writeHead(200);
-    res.end('tweets data');
-});
+app.use('/tweets', tweetsRoute);
+app.use('/', userRoute);
 
 app.listen(PORT, () => {
-    console.log(`server running on http://localhost:${8000}`);
+    console.log(`server running on http://localhost:${PORT}`);
 })
