@@ -15,6 +15,4 @@ app.use(express.json());
 app.use('/tweets', tweetsRoute);
 app.use('/', userRoute);
 
-app.listen(PORT, () => {
-    console.log(`server running on http://localhost:${PORT}`);
-})
+app.listen(PORT);
