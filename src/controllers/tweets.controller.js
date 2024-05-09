@@ -1,5 +1,6 @@
 import data from "../data/data.js";
 
+
 export const getAllTwitters = (req, res) => {
     try {
         res.status(200).json(data);
@@ -24,6 +25,9 @@ export const postTweet = (req, res) => {
         if (!req.body.text) {
             throw new Error("Tweet not available");
         }
+        if (req.body.text.length > 180) {
+            throw new Error("Many characters");
+        }
         const userPost = {
             "id": id,
             "author": "Bradley Ortiz",
@@ -36,33 +40,11 @@ export const postTweet = (req, res) => {
             "retweet": 0,
             "react": 0,
         }
+        const dataInDB = [userPost, ...data];
 
-        res.status(200).send(userPost);
+        res.status(200).json(dataInDB);
 
     } catch (error) {
         res.status(500).json({ message: error });
     }
-
-
-
-    // const userPost = {
-    //     "id": "002",
-    //     "author": "Bradley Ortiz",
-    //     "nickname": "@bradley",
-    //     "time": "7m",
-    //     "avatar": "/assets/Profile-Photo.png",
-    //     "text": text,
-    //     "image": "https://source.unsplash.com/random/800x300",
-    //     "reply": 94,
-    //     "retweet": 354,
-    //     "react": 454
-    // }
-
-    // const dataInDB = [userPost, ...data];
-
-    // try {
-    //     res.status(200).send(text);
-    // } catch (error) {
-    //     res.status(500).json({ message: error })
-    // }
 };
