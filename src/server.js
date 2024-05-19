@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoute from './routes/user.route.js';
 import tweetsRoute from './routes/tweets.route.js';
 
+
 dotenv.config();
 
 const { PORT } = process.env;
